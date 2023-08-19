@@ -1,0 +1,67 @@
+<div class="main">
+  <div class="pagetitle">
+    <h1>Customer Details</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="dashboard">Home</a></li>
+        <li class="breadcrumb-item active">Customer Details</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card h-100">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <div>
+              <button class="btn btn-success">
+                <i class="fas fa-file-excel"></i>
+                &nbsp;Export Customer-Details
+              </button> &nbsp;
+              <button class="btn btn-light">
+                <i class="fas fa-sync-alt" (click)="reloadWebsite()"></i>
+              </button>
+            </div>
+            <div class="d-flex align-items-center">
+              <label for="searchBar" class="me-2">Search:</label>
+              <input
+                type="text"
+                id="searchBar"
+                placeholder="Enter customer name"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="card-body overflow-auto" style="max-height: 300px">
+            <h5 class="card-title">Customers</h5>
+            <table class="table table-hover align-items-center text-center">
+              <thead class="sticky-top">
+                <tr>
+                  <th>S.N</th>
+                  <th>Customer Name</th>
+                  <th>Email</th>
+                  <th>Address</th>
+                  <th>Contact</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let customer of uniqueCustomers; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ customer.bname }}</td>
+                  <td>{{ customer.bemail }}</td>
+                  <td>{{ customer.baddress }}</td>
+                  <td>{{ customer.bcontact }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <nav class="card-footer">
+            <ul class="pagination justify-content-center">
+              <!-- Pagination buttons can be added here if needed -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

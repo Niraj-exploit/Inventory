@@ -1,0 +1,281 @@
+<div class="main">
+  <div class="pagetitle">
+    <h1>Purchase Product</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+        <li class="breadcrumb-item active">Purchase Product</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- End of breedcom -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-toggle="modal"
+                data-target="#saleForm"
+                *ngIf="roll() === 'ADMIN' && 'EDITOR'"
+              >
+                <i class="fas fa-plus"></i>
+                &nbsp;Add Product
+              </button>
+              &nbsp;
+              <button class="btn btn-success">
+                <i class="fas fa-file-excel"></i>
+                &nbsp;Export Stock
+              </button>
+              &nbsp;
+              <button class="btn btn-light" (click)="reloadWebsite()">
+                <i class="fas fa-sync-alt"></i>
+              </button>
+            </div>
+            <div class="d-flex align-items-center">
+              <label for="searchBar" class="me-2">Search:</label>
+              <input
+                type="text"
+                id="searchBar"
+                placeholder="Enter product name"
+                class="form-control"
+              />
+            </div>
+          </div>
+          <div class="card-body overflow-auto" style="max-height: 300px">
+            <h5 class="card-title">Recent Purchase</h5>
+            <table class="table table-hover align-items-center text-center">
+              <thead class="sticky-top">
+                <tr>
+                  <th>S.N</th>
+                  <th>Product Name</th>
+                  <th>Code</th>
+                  <th>Qty</th>
+                  <th>Purchase Price</th>
+                  <th>Selling Price</th>
+                  <th>Category No</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let purchase of recentPurchase; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ purchase.name }}</td>
+                  <td>{{ purchase.code }}</td>
+                  <td>{{ purchase.quantity }}</td>
+                  <td>{{ purchase.bprice }}</td>
+                  <td>{{ purchase.sprice }}</td>
+                  <td>{{ purchase.categoryCode }}</td>
+                  <td>
+                    <div>
+                      <div>
+                        <span *ngIf="roll() === 'ADMIN' || 'EDITOR'">
+                          <button
+                            type="button"
+                            class="btn btn-secondary btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                          >
+                            <i class="fas fa-edit"></i>&nbsp; Edit
+                          </button></span
+                        ><span>|</span>
+                        <span *ngIf="roll() === 'ADMIN' || 'EDITOR'">
+                          <button
+                            type="button"
+                            class="btn btn-info btn-sm"
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal"
+                          >
+                            <i class="fas fa-eye"></i>&nbsp; View
+                          </button></span
+                        >
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <nav class="card-footer">
+            <ul class="pagination justify-content-center">
+              <!-- Pagination buttons can be added here if needed -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div
+  class="modal fade"
+  id="saleForm"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="saleForm"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title" id="saleForm">Sell Product</h5>
+        <button type="button" class="btn-close" data-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form novalidate (ngSubmit)="newProduct()">
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              name="productName"
+              required
+              list="productSuggestions"
+              [(ngModel)]="addedProduct.name"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="quantity"
+              name="code"
+              required
+              name="saleQuantity"
+              list="categoryCodeSuggestions"
+              [(ngModel)]="addedProduct.code"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="customerName" class="form-label">Buying Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="customerName"
+              name="bprice"
+              required
+              list="customerNameSuggestions"
+              name="customerName"
+              [(ngModel)]="addedProduct.bprice"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="customerEmail" class="form-label">Selling Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="customerEmail"
+              name="sprice"
+              required
+              list="customerEmailSuggestions"
+              name="customerEmail"
+              [(ngModel)]="addedProduct.sprice"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="customerAddress" class="form-label">Quantity</label>
+            <input
+            type="number"
+            class="form-control"
+            id="quantityInput"
+            name="quantity"
+            [(ngModel)]="addedProduct.quantity"
+            (input)="quantityEntered = true; categoryList()"
+          />
+          </div>
+          <div class="mb-3">
+            <label for="categorySelect" class="form-label">Category</label>
+            <ng-select
+              id="categorySelect"
+              [items]="categories"
+              bindLabel="name"
+              [searchable]="true"
+              [ngModelOptions]="{ standalone: true }"
+              [(ngModel)]="selectedCategoryCode"
+              (change)="onCategorySelect()"
+            >
+              <ng-template ng-label-tmp let-item="item">
+                {{ item.name }} ({{ item.volume }})
+              </ng-template>
+              <ng-template ng-option-tmp let-item="item" let-index="index">
+                <span>{{ item.name }} ({{ item.volume }})</span>
+              </ng-template>
+            </ng-select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="vendorName" class="form-label">Vendor Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="vendorName"
+              name="vendorName"
+              required
+              list="vendorNameSuggestions"
+              name="vendorName"
+              [(ngModel)]="addedProduct.sname"
+            />
+            <datalist id="vendorNameSuggestions">
+              <ng-container *ngFor="let name of uniqueVendorNames">
+                <option [value]="name"></option>
+              </ng-container>
+            </datalist>
+          </div>
+          <div class="mb-3">
+            <label for="vendorEmail" class="form-label">Vendor Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="vendorEmail"
+              name="vendorEmail"
+              required
+              list="vendorEmailSuggestions"
+              name="vendorEmail"
+              [(ngModel)]="addedProduct.semail"
+            />
+            <datalist id="vendorEmailSuggestions">
+              <ng-container *ngFor="let email of uniqueVendorEmails">
+                <option [value]="email"></option>
+              </ng-container>
+            </datalist>
+          </div>
+          <div class="mb-3">
+            <label for="vendorContact" class="form-label">Vendor Contact</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="vendorContact"
+              name="vendorContact"
+              required
+              list="vendorContactSuggestions"
+              name="vendorContact"
+              [(ngModel)]="addedProduct.scontact"
+            />
+            <datalist id="vendorContactSuggestions">
+              <ng-container *ngFor="let contact of uniqueVendorContacts">
+                <option [value]="contact"></option>
+              </ng-container>
+            </datalist>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

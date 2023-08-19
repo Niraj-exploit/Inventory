@@ -1,0 +1,123 @@
+<div class="main">
+  <div class="pagetitle">
+    <h1>Stock</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+        <li class="breadcrumb-item active">Stock</li>
+      </ol>
+    </nav>
+  </div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card h-100">
+          <div
+            class="card-header d-flex justify-content-between align-items-center"
+          >
+            <div>
+              <button class="btn btn-success">
+                <i class="fas fa-file-excel"></i>
+                &nbsp;Export Stock
+              </button>
+              &nbsp;
+              <button class="btn btn-light">
+                <i class="fas fa-sync-alt" (click)="reloadWebsite()"></i>
+              </button>
+            </div>
+            <div class="d-flex align-items-center">
+              <label for="searchBar" class="me-2">Search:</label>
+              <input
+                type="text"
+                id="searchBar"
+                [(ngModel)]="searchTerm"
+                placeholder="Enter product name"
+                class="form-control"
+                (input)="filterStock($event)"
+              />
+            </div>
+          </div>
+          <div class="card-body overflow-auto" style="max-height: 300px">
+            <h5 class="card-title">Stocks</h5>
+            <table class="table table-hover align-items-center text-center">
+              <thead class="sticky-top">
+                <tr>
+                  <th>S.N</th>
+                  <th>Product Name</th>
+                  <th>Code</th>
+                  <th>Qty</th>
+                  <th>Purchase Price</th>
+                  <th>Selling Price</th>
+                  <th>Category Code</th>
+                  <th>Vendor</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let stockItem of filteredStock; let i = index"
+                  class="cursor-pointer"
+                >
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ stockItem.name }}</td>
+                  <td>{{ stockItem.code }}</td>
+                  <td class="marker-cell">
+                    <span
+                      [style.background-color]="
+                        stockItem.quantity < 100
+                          ? 'red'
+                          : stockItem.quantity < 500
+                          ? 'yellow'
+                          : stockItem.quantity >= 500
+                          ? 'green'
+                          : 'transparent'
+                      "
+                      class="marker-quantity"
+                      [style.color]="'black'"
+                    >
+                      {{ stockItem.quantity }}
+                    </span>
+                  </td>
+                  <td>{{ stockItem.bprice }}</td>
+                  <td>{{ stockItem.sprice }}</td>
+                  <td>{{ stockItem.categoryCode }}</td>
+                  <td>{{ stockItem.sname }}</td>
+                  <td>
+                    <div>
+                      <span *ngIf="roll() === 'ADMIN' || 'EDITOR'">
+                        <button
+                          type="button"
+                          class="btn btn-secondary btn-sm"
+                          data-bs-toggle="modal"
+                          data-bs-target="#exampleModal"
+                        >
+                          <i class="fas fa-edit"></i>
+                          Edit
+                        </button>
+                        <span>|</span>
+                      </span>
+                      <button
+                        type="button"
+                        class="btn btn-info btn-sm"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                      >
+                        <i class="fas fa-eye"></i>
+                        View
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <nav class="card-footer">
+            <ul class="pagination justify-content-center">
+              <!-- Pagination buttons can be added here if needed -->
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

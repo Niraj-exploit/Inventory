@@ -1,0 +1,28 @@
+<header
+  class="header fixed-top d-flex align-items-center justify-content-center"
+>
+  <div class="d-flex align-items-center justify-content-center">
+    <a routerLink="" class="logo d-flex align-items-center">
+      <img src="../../../assets/img/favicon.png" alt="ims" />
+      <span class="d-flex">IMS</span>
+    </a>
+  </div>
+  <!-- End Logo -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="pe-3">
+        <button
+          class="btn btn-danger btn-sm d-flex align-items-center"
+          (click)="logout()"
+        >
+          <span>SignOut</span>
+        </button>
+      </li>
+
+      <!-- End Profile Nav -->
+    </ul>
+  </nav>
+  <!-- End Icons Navigation -->
+</header>
+<!-- End Header -->

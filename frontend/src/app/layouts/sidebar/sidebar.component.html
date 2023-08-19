@@ -1,0 +1,91 @@
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-item" routerLinkActive="sidelist">
+      <a class="nav-link collapsed" routerLink="dashboard">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li>
+    <!-- End of dashboard -->
+    <li class="nav-item" routerLinkActive="sidelist">
+      <a
+        routerLink="stock"
+        class="nav-link collapsed"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+      >
+        <i class="bi bi-box"></i><span>Stock</span>
+      </a>
+    </li>
+    <!-- End of stock -->
+
+    <li class="nav-item" routerLinkActive="sidelist">
+      <a
+        class="nav-link collapsed"
+        routerLink="category"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+        routerLinkActive="active"
+      >
+        <i class="bi bi-layers"></i>
+        <span>Category</span>
+      </a>
+    </li>
+    <!-- End of category -->
+
+    <li class="nav-item" routerLinkActive="sidelist">
+      <a
+        class="nav-link collapsed"
+        routerLink="sell-product"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+        routerLinkActive="active"
+      >
+        <i class="bi bi-tags"></i>
+        <span>Sell Product</span>
+      </a>
+    </li>
+    <!-- End of sell product -->
+
+    <li class="nav-item" routerLinkActive="sidelist" *ngIf="roll() === 'ADMIN','EDITOR'">
+      <a class="nav-link collapsed" routerLink="vendor-details">
+        <i class="bi bi-file-text"></i>
+
+        <span>Vendor Details</span>
+      </a>
+    </li>
+    <!-- End of vendor Details -->
+    <li class="nav-item" routerLinkActive="sidelist">
+      <a
+        class="nav-link collapsed"
+        routerLink="customer-details"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+      >
+        <i class="bi bi-people"></i><span>Customer Details</span>
+      </a>
+    </li>
+    <!-- End of customer details -->
+
+    <li class="nav-item" routerLinkActive="sidelist" *ngIf="roll() === 'ADMIN'||'EDITOR'">
+      <a
+        class="nav-link collapsed"
+        routerLink="purchase-product"
+        data-bs-target="#components-nav"
+        data-bs-toggle="collapse"
+      >
+        <i class="bi bi-plus-circle"></i>
+        <span>Purchase Product</span>
+      </a>
+    </li>
+    <!-- End of purchase product -->
+
+    <li class="nav-item" routerLinkActive="sidelist" *ngIf="roll() === 'ADMIN'">
+      <a class="nav-link collapsed" routerLink="system-users">
+        <i class="bi bi-shield-lock"></i>
+        <span>System Users</span>
+      </a>
+    </li>
+    <!-- End Register users -->
+  </ul>
+</aside>

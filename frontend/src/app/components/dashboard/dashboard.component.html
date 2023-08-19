@@ -1,0 +1,148 @@
+<div class="pagetitle">
+  <h1>Dashboard</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+      <li class="breadcrumb-item active">Dashboard</li>
+    </ol>
+  </nav>
+</div>
+<!-- End Page Title -->
+
+<section class="section dashboard">
+  <div class="row">
+    <!-- Left side columns -->
+    <div class="col">
+      <div class="row">
+        <!-- Sales Card -->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card sales-card">
+            <div class="card-body">
+              <h5 class="card-title">Sales <span>| Total</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-cart"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>{{ totalSale }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Sales Card -->
+
+        <!-- Revenue Card -->
+        <div class="col-xxl-4 col-md-6">
+          <div class="card info-card revenue-card">
+            <div class="card-body">
+              <h5 class="card-title">Revenue <span>| Total</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-currency-rupee"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>{{ revenue }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Revenue Card -->
+
+        <!-- Customers Card -->
+        <div class="col-xxl-4 col-xl-12">
+          <div class="card info-card customers-card">
+            <div class="card-body">
+              <h5 class="card-title">Customers <span>| Total</span></h5>
+
+              <div class="d-flex align-items-center">
+                <div
+                  class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                >
+                  <i class="bi bi-people"></i>
+                </div>
+                <div class="ps-3">
+                  <h6>{{ totalCustomerCount }}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Customers Card -->
+
+        <!-- Recent Sales -->
+        <section class="section">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card h-100">
+                <div class="card-body overflow-auto" style="max-height: 300px">
+                  <h5 class="card-title">Top Selling</h5>
+                  <table
+                    class="table table-hover align-items-center text-center"
+                  >
+                    <thead class="sticky-top">
+                      <tr>
+                        <th>Rank</th>
+                        <th>Product Name</th>
+                        <th>Qty</th>
+                        <th>Total Price</th>
+                        <th>Customer</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let sale of sales; let i = index"
+                        class="cursor-pointer"
+                      >
+                        <th scope="row">{{ i + 1 }}</th>
+                        <td>{{ sale.detail }}</td>
+                        <td>{{ sale.quantity }}</td>
+                        <td>
+                          <i class="bi bi-currency-rupee"></i>
+                          {{ sale.totalPrice }}
+                        </td>
+                        <td>{{ sale.bname }}</td>
+                        <td>
+                          <div>
+                            <button
+                              type="button"
+                              class="btn btn-info btn-sm"
+                              data-bs-toggle="modal"
+                              data-bs-target="#exampleModal"
+                            >
+                              <i class="fas fa-eye"></i>
+                              View
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <nav class="card-footer">
+                  <ul class="pagination justify-content-center">
+                    <!-- <li class="page-item" *ngFor="let pageNumber of totalPages">
+              <a class="page-link" (click)="changePage(pageNumber)">{{ pageNumber }}</a>
+            </li> -->
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- End Recent Sales -->
+      </div>
+    </div>
+    <!-- End Left side columns -->
+  </div>
+</section>
+
+<!-- End #main -->

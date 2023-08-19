@@ -1,0 +1,30 @@
+.marker-cell {
+    position: relative;
+    text-align: center;
+    padding: 0;
+    line-height: 1;
+  }
+  
+  .marker-quantity {
+    display: inline-block;
+    padding: 5px 10px; /* Set a consistent padding for all colors */
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+    color: white;
+  }
+  
+  .marker-quantity::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 50%;
+    background-color: inherit;
+    transform: translateX(-50%) rotate(-45deg);
+    transform-origin: top left;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    border-radius: 5px;
+  }
+  

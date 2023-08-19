@@ -1,0 +1,18 @@
+<ng-container *ngIf="isLoginPage()">
+    <div class="container">
+      <div style="margin-top: 10%">
+        <app-login></app-login>
+      </div>
+    </div>
+  </ng-container>
+  
+  <ng-container *ngIf="!isLoginPage()">
+    <main id="main" class="main">
+      <router-outlet>
+        <app-topbar></app-topbar>
+        <app-sidebar></app-sidebar>
+      </router-outlet>
+    </main>
+    <app-footer></app-footer>
+  </ng-container>
+  

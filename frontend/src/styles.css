@@ -1,0 +1,16 @@
+ 
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i");
+@import url("../node_modules/bootstrap/dist/css/bootstrap.min.css");
+@import "~@ng-select/ng-select/themes/default.theme.css";
+ 
+@import url("./assets/vendor/bootstrap-icons/bootstrap-icons.min.css");
+.card, .sidebar {
+    transition: box-shadow 0.4s ease; /* Add transition to the box-shadow property */
+    /* OR */
+    /* transition: border 0.3s ease; */ /* Add transition to the border property */
+  }
+  
+  .card:hover , .sidebar:hover{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+ 
+  }
